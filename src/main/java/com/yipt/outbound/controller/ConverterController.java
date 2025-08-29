@@ -14,6 +14,8 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,157 +24,140 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class ConverterController {
-	@PostMapping("/convert")
-	public ResponseEntity<byte[]> convert(@RequestParam("file") MultipartFile file) throws Exception {
-		// Save uploaded file to temp
-		File tempFile = File.createTempFile("upload-", ".xlsx");
-		file.transferTo(tempFile);
-		System.out.println("Received file: " + file.getOriginalFilename() + ", size=" + file.getSize());
 
+    private static final Logger logger = LoggerFactory.getLogger(ConverterController.class);
 
-		// Run conversion in memory
-		try (FileInputStream fis = new FileInputStream(tempFile);
-				XSSFWorkbook workbook = new XSSFWorkbook(fis);
-				ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+    @PostMapping("/convert")
+    public ResponseEntity<byte[]> convert(@RequestParam("file") MultipartFile file) throws Exception {
+        File tempFile = File.createTempFile("upload-", ".xlsx");
+        file.transferTo(tempFile);
 
-			// Process workbook
-			for (int s = 0; s < workbook.getNumberOfSheets(); s++) {
-				XSSFSheet sheet = workbook.getSheetAt(s);
+        logger.info("Received file: {}, size={}", file.getOriginalFilename(), file.getSize());
 
-				for (Row row : sheet) {
-					for (Cell cell : row) {
-						if (cell.getCellType() == CellType.STRING) {
-//							XSSFRichTextString richText = (XSSFRichTextString) cell.getRichStringCellValue();
-//							if (richText.numFormattingRuns() > 0) {
-								String html = convertCellToHtml(cell);
-								cell.setCellValue(html);
-//							}
-						}
-					}
-				}
-			}
+        try (FileInputStream fis = new FileInputStream(tempFile);
+             XSSFWorkbook workbook = new XSSFWorkbook(fis);
+             ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
 
-			// Write workbook to memory
-			workbook.write(bos);
+            logger.info("Processing workbook with {} sheet(s)", workbook.getNumberOfSheets());
 
-			// Send file back
-			return ResponseEntity.ok().header("Content-Disposition", "attachment; filename=converted.xlsx")
-					.body(bos.toByteArray());
-		}
-	}
+            for (int s = 0; s < workbook.getNumberOfSheets(); s++) {
+                XSSFSheet sheet = workbook.getSheetAt(s);
+                logger.info("Processing sheet: {}", sheet.getSheetName());
 
-	private String convertCellToHtml(Cell cell) {
-	    if (cell == null || cell.getCellType() != CellType.STRING) {
-	        return "<p></p>";
-	    }
+                for (Row row : sheet) {
+                    for (Cell cell : row) {
+                        if (cell.getCellType() == CellType.STRING) {
+                            String html = convertCellToHtml(cell);
+                            cell.setCellValue(html);
+                        }
+                    }
+                }
+            }
 
-	    XSSFRichTextString richText = (XSSFRichTextString) cell.getRichStringCellValue();
-	    String text = richText.getString();
-	    int length = text.length();
-	    int numRuns = richText.numFormattingRuns();
+            workbook.write(bos);
+            logger.info("Workbook conversion completed for file: {}", file.getOriginalFilename());
 
-	    StringBuilder html = new StringBuilder();
-	    int currentIndex = 0;
+            return ResponseEntity.ok()
+                    .header("Content-Disposition", "attachment; filename=converted.xlsx")
+                    .body(bos.toByteArray());
 
-	    // ถ้าไม่มี run เลย → plain text
-	    if (numRuns == 0) {
-	        html.append(escapeHtml(text));
-	    } else {
-	        for (int i = 0; i < numRuns; i++) {
-	            int runIndex = richText.getIndexOfFormattingRun(i);
-	            if (runIndex < 0 || runIndex > length) continue;
+        } catch (Exception e) {
+            logger.error("Error converting file: {}", file.getOriginalFilename(), e);
+            throw e;
+        }
+    }
 
-	            int nextIndex = (i + 1 < numRuns) ? richText.getIndexOfFormattingRun(i + 1) : length;
-	            nextIndex = Math.min(nextIndex, length);
+    private String convertCellToHtml(Cell cell) {
+        if (cell == null || cell.getCellType() != CellType.STRING) {
+            return "<p></p>";
+        }
 
-	            // plain text ก่อน run
-	            if (runIndex > currentIndex) {
-	                html.append(escapeHtml(text.substring(currentIndex, runIndex)));
-	            }
+        XSSFRichTextString richText = (XSSFRichTextString) cell.getRichStringCellValue();
+        String text = richText.getString();
+        int length = text.length();
+        int numRuns = richText.numFormattingRuns();
 
-	            // text ของ run
-	            if (runIndex < nextIndex) {
-	                String runText = text.substring(runIndex, nextIndex);
-	                XSSFFont font = richText.getFontOfFormattingRun(i);
+        StringBuilder html = new StringBuilder();
+        int currentIndex = 0;
 
-	                if (font != null && hasStyle(font)) {
-	                    html.append(applyFontHtml(runText, font));
-	                } else {
-	                    html.append(escapeHtml(runText));
-	                }
-	            }
+        if (numRuns == 0) {
+            html.append(escapeHtml(text));
+        } else {
+            for (int i = 0; i < numRuns; i++) {
+                int runIndex = richText.getIndexOfFormattingRun(i);
+                if (runIndex < 0 || runIndex > length) continue;
 
-	            currentIndex = nextIndex;
-	        }
+                int nextIndex = (i + 1 < numRuns) ? richText.getIndexOfFormattingRun(i + 1) : length;
+                nextIndex = Math.min(nextIndex, length);
 
-	        // trailing text หลัง run
-	        if (currentIndex < length) {
-	            html.append(escapeHtml(text.substring(currentIndex)));
-	        }
-	    }
+                if (runIndex > currentIndex) {
+                    html.append(escapeHtml(text.substring(currentIndex, runIndex)));
+                }
 
-	    return "<p>" + html.toString() + "</p>";
-	}
+                if (runIndex < nextIndex) {
+                    String runText = text.substring(runIndex, nextIndex);
+                    XSSFFont font = richText.getFontOfFormattingRun(i);
 
-	// helper: เช็คว่า font มี style จริง ๆ หรือไม่
-	private boolean hasStyle(XSSFFont font) {
-	    return font.getBold() || font.getItalic() || font.getUnderline() != Font.U_NONE || font.getStrikeout()
-	           || (font.getFontHeightInPoints() != 11) // ถ้า font size != default
-	           || (font.getXSSFColor() != null);      // หรือมีสี
-	}
+                    if (font != null && hasStyle(font)) {
+                        html.append(applyFontHtml(runText, font));
+                    } else {
+                        html.append(escapeHtml(runText));
+                    }
+                }
 
+                currentIndex = nextIndex;
+            }
 
+            if (currentIndex < length) {
+                html.append(escapeHtml(text.substring(currentIndex)));
+            }
+        }
 
+        return "<p>" + html.toString() + "</p>";
+    }
 
+    private boolean hasStyle(XSSFFont font) {
+        return font.getBold() || font.getItalic() || font.getUnderline() != Font.U_NONE || font.getStrikeout()
+               || (font.getFontHeightInPoints() != 11)
+               || (font.getXSSFColor() != null);
+    }
 
-	private String applyFontHtml(String text, XSSFFont font) {
-		if (font == null)
-			return escapeHtml(text);
+    private String applyFontHtml(String text, XSSFFont font) {
+        if (font == null) return escapeHtml(text);
 
-		StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-		// Open formatting tags
-		if (font.getBold())
-			sb.append("<strong>");
-		if (font.getItalic())
-			sb.append("<em>");
-		if (font.getUnderline() != Font.U_NONE)
-			sb.append("<u>");
-		if (font.getStrikeout())
-			sb.append("<s>");
+        if (font.getBold()) sb.append("<strong>");
+        if (font.getItalic()) sb.append("<em>");
+        if (font.getUnderline() != Font.U_NONE) sb.append("<u>");
+        if (font.getStrikeout()) sb.append("<s>");
 
-		// Span for font size/color
-		sb.append("<span style=\"");
-		sb.append("font-size:").append(font.getFontHeightInPoints()).append("pt;");
-		if (font.getXSSFColor() != null) {
-			byte[] rgb = font.getXSSFColor().getRGB();
-			if (rgb != null && rgb.length == 3) {
-				sb.append("color:#").append(String.format("%02X%02X%02X", rgb[0], rgb[1], rgb[2])).append(";");
-			}
-		}
-		sb.append("\">");
+        sb.append("<span style=\"");
+        sb.append("font-size:").append(font.getFontHeightInPoints()).append("pt;");
+        if (font.getXSSFColor() != null) {
+            byte[] rgb = font.getXSSFColor().getRGB();
+            if (rgb != null && rgb.length == 3) {
+                sb.append("color:#").append(String.format("%02X%02X%02X", rgb[0], rgb[1], rgb[2])).append(";");
+            }
+        }
+        sb.append("\">");
 
-		sb.append(escapeHtml(text));
+        sb.append(escapeHtml(text));
 
-		sb.append("</span>");
+        sb.append("</span>");
 
-		// Close formatting tags in reverse order
-		if (font.getStrikeout())
-			sb.append("</s>");
-		if (font.getUnderline() != Font.U_NONE)
-			sb.append("</u>");
-		if (font.getItalic())
-			sb.append("</em>");
-		if (font.getBold())
-			sb.append("</strong>");
+        if (font.getStrikeout()) sb.append("</s>");
+        if (font.getUnderline() != Font.U_NONE) sb.append("</u>");
+        if (font.getItalic()) sb.append("</em>");
+        if (font.getBold()) sb.append("</strong>");
 
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
-	private String escapeHtml(String s) {
-		return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;")
-				.replace("\r\n", "<br/>") // Windows line break (Alt+Enter in Excel)
-				.replace("\n", "<br/>") // Unix line break
-				.replace("\r", "<br/>"); // Old Mac line break
-	}
+    private String escapeHtml(String s) {
+        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;")
+                .replace("\r\n", "<br/>")
+                .replace("\n", "<br/>")
+                .replace("\r", "<br/>");
+    }
 }
