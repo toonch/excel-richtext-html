@@ -14,8 +14,6 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,21 +23,19 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class ConverterController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ConverterController.class);
 
     @PostMapping("/convert")
     public ResponseEntity<byte[]> convert(@RequestParam("file") MultipartFile file) {
     System.out.println("/convert endpoint called");
-    logger.info("/convert endpoint called");
-    logger.info("Received file: {}, size={}", file.getOriginalFilename(), file.getSize());
+    System.out.println("Received file: " + file.getOriginalFilename() + ", size=" + file.getSize());
         try (
             XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
             ByteArrayOutputStream bos = new ByteArrayOutputStream()
         ) {
-            logger.info("Processing workbook with {} sheet(s)", workbook.getNumberOfSheets());
+            System.out.println("Processing workbook with " + workbook.getNumberOfSheets() + " sheet(s)");
             for (int s = 0; s < workbook.getNumberOfSheets(); s++) {
                 XSSFSheet sheet = workbook.getSheetAt(s);
-                logger.info("Processing sheet: {}", sheet.getSheetName());
+                System.out.println("Processing sheet: " + sheet.getSheetName());
                 for (Row row : sheet) {
                     for (Cell cell : row) {
                         if (cell.getCellType() == CellType.STRING) {
@@ -50,12 +46,12 @@ public class ConverterController {
                 }
             }
             workbook.write(bos);
-            logger.info("Workbook conversion completed for file: {}", file.getOriginalFilename());
+            System.out.println("Workbook conversion completed for file: " + file.getOriginalFilename());
             return ResponseEntity.ok()
                     .header("Content-Disposition", "attachment; filename=converted.xlsx")
                     .body(bos.toByteArray());
         } catch (Exception e) {
-            logger.error("Error converting file: {} - {}", file.getOriginalFilename(), e.getMessage(), e);
+            System.out.println("Error converting file: " + file.getOriginalFilename() + " - " + e.getMessage());
             e.printStackTrace();
             System.out.println("Exception in /convert: " + e);
             return ResponseEntity.status(500).body(null);
