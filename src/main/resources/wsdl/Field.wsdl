@@ -1,0 +1,1289 @@
+<wsdl:definitions
+	xmlns:s="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:tns="http://archer-tech.com/webservices/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://archer-tech.com/webservices/">
+	<wsdl:types>
+		<s:schema elementFormDefault="qualified"
+			targetNamespace="http://archer-tech.com/webservices/">
+			<s:element name="CreateValuesListItemWithNumericValue">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListId" type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="valuesListItemName" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListItemNumericValue" type="s:decimal" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element
+				name="CreateValuesListItemWithNumericValueResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="CreateValuesListItemWithNumericValueResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CreateValuesListValue">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListId" type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="valuesListValueName" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CreateValuesListValueResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="CreateValuesListValueResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CreateChildValuesListItemWithNumericValue">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="parentValuesListItemId" type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="valuesListItemName" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListItemNumericValue" type="s:decimal" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element
+				name="CreateChildValuesListItemWithNumericValueResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="CreateChildValuesListItemWithNumericValueResult"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CreateValuesListValueChild">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="selectId"
+							type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="valuesListValueName" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="parentId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CreateValuesListValueChildResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="CreateValuesListValueChildResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="UpdateValuesListItemWithNumericValue">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListItemId" type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="valuesListItemName" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListItemNumericValue" type="s:decimal" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element
+				name="UpdateValuesListItemWithNumericValueResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="UpdateValuesListItemWithNumericValueResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="UpdateValuesListNumericValueToNull">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListItemId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element
+				name="UpdateValuesListNumericValueToNullResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="UpdateValuesListNumericValueToNullResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="UpdateValuesListValue">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListValueId" type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="valuesListValueName" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="UpdateValuesListValueResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="UpdateValuesListValueResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="LookupListValue">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="fieldId"
+							type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1" name="keyword"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="LookupListValueResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="LookupListValueResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="DeleteValuesListValue">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListValueId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="DeleteValuesListValueResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="DeleteValuesListValueResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListValue">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListValueId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListValueResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetValuesListValueResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListValueWithTranslations">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListValueId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="translate"
+							type="s:boolean" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element
+				name="GetValuesListValueWithTranslationsResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetValuesListValueWithTranslationsResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListItem">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListValueId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListItemResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetValuesListItemResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListItemWithTranslations">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListValueId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="translate"
+							type="s:boolean" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListItemWithTranslationsResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetValuesListItemWithTranslationsResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValueListForField">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="fieldId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValueListForFieldResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetValueListForFieldResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValueListForFieldWithTranslations">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="fieldId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="translate"
+							type="s:boolean" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element
+				name="GetValueListForFieldWithTranslationsResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetValueListForFieldWithTranslationsResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValueListByParent">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValueListByParentResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetValueListByParentResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesList">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetValuesListResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListWithTranslations">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="valuesListId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="translate"
+							type="s:boolean" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListWithTranslationsResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetValuesListWithTranslationsResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListValueIdByGUID">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="GUID"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListValueIdByGUIDResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="GetValuesListValueIdByGUIDResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListIdByGUID">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="GUID"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetValuesListIdByGUIDResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="GetValuesListIdByGUIDResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetFieldIdsByGUID">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="GUIDs"
+							type="tns:ArrayOfString" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="ArrayOfString">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded"
+						name="string" nillable="true" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="GetFieldIdsByGUIDResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetFieldIdsByGUIDResult"
+							type="tns:ArrayOfWebServiceKeyValuePair" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="ArrayOfWebServiceKeyValuePair">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded"
+						name="WebServiceKeyValuePair" type="tns:WebServiceKeyValuePair" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="WebServiceKeyValuePair">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Key"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Value"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="GetFieldIdByGUID">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="GUID"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetFieldIdByGUIDResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="GetFieldIdByGUIDResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+		</s:schema>
+	</wsdl:types>
+	<wsdl:message
+		name="CreateValuesListItemWithNumericValueSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:CreateValuesListItemWithNumericValue" />
+	</wsdl:message>
+	<wsdl:message
+		name="CreateValuesListItemWithNumericValueSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:CreateValuesListItemWithNumericValueResponse" />
+	</wsdl:message>
+	<wsdl:message name="CreateValuesListValueSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:CreateValuesListValue" />
+	</wsdl:message>
+	<wsdl:message name="CreateValuesListValueSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:CreateValuesListValueResponse" />
+	</wsdl:message>
+	<wsdl:message
+		name="CreateChildValuesListItemWithNumericValueSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:CreateChildValuesListItemWithNumericValue" />
+	</wsdl:message>
+	<wsdl:message
+		name="CreateChildValuesListItemWithNumericValueSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:CreateChildValuesListItemWithNumericValueResponse" />
+	</wsdl:message>
+	<wsdl:message name="CreateValuesListValueChildSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:CreateValuesListValueChild" />
+	</wsdl:message>
+	<wsdl:message name="CreateValuesListValueChildSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:CreateValuesListValueChildResponse" />
+	</wsdl:message>
+	<wsdl:message
+		name="UpdateValuesListItemWithNumericValueSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:UpdateValuesListItemWithNumericValue" />
+	</wsdl:message>
+	<wsdl:message
+		name="UpdateValuesListItemWithNumericValueSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:UpdateValuesListItemWithNumericValueResponse" />
+	</wsdl:message>
+	<wsdl:message
+		name="UpdateValuesListNumericValueToNullSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:UpdateValuesListNumericValueToNull" />
+	</wsdl:message>
+	<wsdl:message
+		name="UpdateValuesListNumericValueToNullSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:UpdateValuesListNumericValueToNullResponse" />
+	</wsdl:message>
+	<wsdl:message name="UpdateValuesListValueSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:UpdateValuesListValue" />
+	</wsdl:message>
+	<wsdl:message name="UpdateValuesListValueSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:UpdateValuesListValueResponse" />
+	</wsdl:message>
+	<wsdl:message name="LookupListValueSoapIn">
+		<wsdl:part name="parameters" element="tns:LookupListValue" />
+	</wsdl:message>
+	<wsdl:message name="LookupListValueSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:LookupListValueResponse" />
+	</wsdl:message>
+	<wsdl:message name="DeleteValuesListValueSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:DeleteValuesListValue" />
+	</wsdl:message>
+	<wsdl:message name="DeleteValuesListValueSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:DeleteValuesListValueResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListValueSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListValue" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListValueSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListValueResponse" />
+	</wsdl:message>
+	<wsdl:message
+		name="GetValuesListValueWithTranslationsSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListValueWithTranslations" />
+	</wsdl:message>
+	<wsdl:message
+		name="GetValuesListValueWithTranslationsSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListValueWithTranslationsResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListItemSoapIn">
+		<wsdl:part name="parameters" element="tns:GetValuesListItem" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListItemSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListItemResponse" />
+	</wsdl:message>
+	<wsdl:message
+		name="GetValuesListItemWithTranslationsSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListItemWithTranslations" />
+	</wsdl:message>
+	<wsdl:message
+		name="GetValuesListItemWithTranslationsSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListItemWithTranslationsResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetValueListForFieldSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:GetValueListForField" />
+	</wsdl:message>
+	<wsdl:message name="GetValueListForFieldSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValueListForFieldResponse" />
+	</wsdl:message>
+	<wsdl:message
+		name="GetValueListForFieldWithTranslationsSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:GetValueListForFieldWithTranslations" />
+	</wsdl:message>
+	<wsdl:message
+		name="GetValueListForFieldWithTranslationsSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValueListForFieldWithTranslationsResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetValueListByParentSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:GetValueListByParent" />
+	</wsdl:message>
+	<wsdl:message name="GetValueListByParentSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValueListByParentResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListSoapIn">
+		<wsdl:part name="parameters" element="tns:GetValuesList" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListWithTranslationsSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListWithTranslations" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListWithTranslationsSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListWithTranslationsResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListValueIdByGUIDSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListValueIdByGUID" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListValueIdByGUIDSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListValueIdByGUIDResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListIdByGUIDSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListIdByGUID" />
+	</wsdl:message>
+	<wsdl:message name="GetValuesListIdByGUIDSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetValuesListIdByGUIDResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetFieldIdsByGUIDSoapIn">
+		<wsdl:part name="parameters" element="tns:GetFieldIdsByGUID" />
+	</wsdl:message>
+	<wsdl:message name="GetFieldIdsByGUIDSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetFieldIdsByGUIDResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetFieldIdByGUIDSoapIn">
+		<wsdl:part name="parameters" element="tns:GetFieldIdByGUID" />
+	</wsdl:message>
+	<wsdl:message name="GetFieldIdByGUIDSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetFieldIdByGUIDResponse" />
+	</wsdl:message>
+	<wsdl:portType name="fieldSoap">
+		<wsdl:operation
+			name="CreateValuesListItemWithNumericValue">
+			<wsdl:input
+				message="tns:CreateValuesListItemWithNumericValueSoapIn" />
+			<wsdl:output
+				message="tns:CreateValuesListItemWithNumericValueSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="CreateValuesListValue">
+			<wsdl:input message="tns:CreateValuesListValueSoapIn" />
+			<wsdl:output message="tns:CreateValuesListValueSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation
+			name="CreateChildValuesListItemWithNumericValue">
+			<wsdl:input
+				message="tns:CreateChildValuesListItemWithNumericValueSoapIn" />
+			<wsdl:output
+				message="tns:CreateChildValuesListItemWithNumericValueSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="CreateValuesListValueChild">
+			<wsdl:input message="tns:CreateValuesListValueChildSoapIn" />
+			<wsdl:output
+				message="tns:CreateValuesListValueChildSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation
+			name="UpdateValuesListItemWithNumericValue">
+			<wsdl:input
+				message="tns:UpdateValuesListItemWithNumericValueSoapIn" />
+			<wsdl:output
+				message="tns:UpdateValuesListItemWithNumericValueSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation
+			name="UpdateValuesListNumericValueToNull">
+			<wsdl:input
+				message="tns:UpdateValuesListNumericValueToNullSoapIn" />
+			<wsdl:output
+				message="tns:UpdateValuesListNumericValueToNullSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="UpdateValuesListValue">
+			<wsdl:input message="tns:UpdateValuesListValueSoapIn" />
+			<wsdl:output message="tns:UpdateValuesListValueSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="LookupListValue">
+			<wsdl:input message="tns:LookupListValueSoapIn" />
+			<wsdl:output message="tns:LookupListValueSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="DeleteValuesListValue">
+			<wsdl:input message="tns:DeleteValuesListValueSoapIn" />
+			<wsdl:output message="tns:DeleteValuesListValueSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListValue">
+			<wsdl:input message="tns:GetValuesListValueSoapIn" />
+			<wsdl:output message="tns:GetValuesListValueSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation
+			name="GetValuesListValueWithTranslations">
+			<wsdl:input
+				message="tns:GetValuesListValueWithTranslationsSoapIn" />
+			<wsdl:output
+				message="tns:GetValuesListValueWithTranslationsSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListItem">
+			<wsdl:input message="tns:GetValuesListItemSoapIn" />
+			<wsdl:output message="tns:GetValuesListItemSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation
+			name="GetValuesListItemWithTranslations">
+			<wsdl:input
+				message="tns:GetValuesListItemWithTranslationsSoapIn" />
+			<wsdl:output
+				message="tns:GetValuesListItemWithTranslationsSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetValueListForField">
+			<wsdl:input message="tns:GetValueListForFieldSoapIn" />
+			<wsdl:output message="tns:GetValueListForFieldSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation
+			name="GetValueListForFieldWithTranslations">
+			<wsdl:input
+				message="tns:GetValueListForFieldWithTranslationsSoapIn" />
+			<wsdl:output
+				message="tns:GetValueListForFieldWithTranslationsSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetValueListByParent">
+			<wsdl:input message="tns:GetValueListByParentSoapIn" />
+			<wsdl:output message="tns:GetValueListByParentSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesList">
+			<wsdl:input message="tns:GetValuesListSoapIn" />
+			<wsdl:output message="tns:GetValuesListSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListWithTranslations">
+			<wsdl:input
+				message="tns:GetValuesListWithTranslationsSoapIn" />
+			<wsdl:output
+				message="tns:GetValuesListWithTranslationsSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListValueIdByGUID">
+			<wsdl:input message="tns:GetValuesListValueIdByGUIDSoapIn" />
+			<wsdl:output
+				message="tns:GetValuesListValueIdByGUIDSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListIdByGUID">
+			<wsdl:input message="tns:GetValuesListIdByGUIDSoapIn" />
+			<wsdl:output message="tns:GetValuesListIdByGUIDSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetFieldIdsByGUID">
+			<wsdl:input message="tns:GetFieldIdsByGUIDSoapIn" />
+			<wsdl:output message="tns:GetFieldIdsByGUIDSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetFieldIdByGUID">
+			<wsdl:input message="tns:GetFieldIdByGUIDSoapIn" />
+			<wsdl:output message="tns:GetFieldIdByGUIDSoapOut" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="fieldSoap" type="tns:fieldSoap">
+		<soap:binding
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation
+			name="CreateValuesListItemWithNumericValue">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/CreateValuesListItemWithNumericValue"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CreateValuesListValue">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/CreateValuesListValue"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="CreateChildValuesListItemWithNumericValue">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/CreateChildValuesListItemWithNumericValue"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CreateValuesListValueChild">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/CreateValuesListValueChild"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="UpdateValuesListItemWithNumericValue">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/UpdateValuesListItemWithNumericValue"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="UpdateValuesListNumericValueToNull">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/UpdateValuesListNumericValueToNull"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateValuesListValue">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/UpdateValuesListValue"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="LookupListValue">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/LookupListValue"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteValuesListValue">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/DeleteValuesListValue"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListValue">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListValue"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="GetValuesListValueWithTranslations">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListValueWithTranslations"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListItem">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListItem"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="GetValuesListItemWithTranslations">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListItemWithTranslations"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValueListForField">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValueListForField"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="GetValueListForFieldWithTranslations">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValueListForFieldWithTranslations"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValueListByParent">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValueListByParent"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesList">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesList"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListWithTranslations">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListWithTranslations"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListValueIdByGUID">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListValueIdByGUID"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListIdByGUID">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListIdByGUID"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetFieldIdsByGUID">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetFieldIdsByGUID"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetFieldIdByGUID">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetFieldIdByGUID"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="fieldSoap12" type="tns:fieldSoap">
+		<soap12:binding
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation
+			name="CreateValuesListItemWithNumericValue">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/CreateValuesListItemWithNumericValue"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CreateValuesListValue">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/CreateValuesListValue"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="CreateChildValuesListItemWithNumericValue">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/CreateChildValuesListItemWithNumericValue"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CreateValuesListValueChild">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/CreateValuesListValueChild"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="UpdateValuesListItemWithNumericValue">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/UpdateValuesListItemWithNumericValue"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="UpdateValuesListNumericValueToNull">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/UpdateValuesListNumericValueToNull"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateValuesListValue">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/UpdateValuesListValue"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="LookupListValue">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/LookupListValue"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteValuesListValue">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/DeleteValuesListValue"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListValue">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListValue"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="GetValuesListValueWithTranslations">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListValueWithTranslations"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListItem">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListItem"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="GetValuesListItemWithTranslations">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListItemWithTranslations"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValueListForField">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValueListForField"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="GetValueListForFieldWithTranslations">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValueListForFieldWithTranslations"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValueListByParent">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValueListByParent"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesList">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesList"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListWithTranslations">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListWithTranslations"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListValueIdByGUID">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListValueIdByGUID"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetValuesListIdByGUID">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetValuesListIdByGUID"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetFieldIdsByGUID">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetFieldIdsByGUID"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetFieldIdByGUID">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetFieldIdByGUID"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="field">
+		<wsdl:port name="fieldSoap" binding="tns:fieldSoap">
+			<soap:address
+				location="https://krungthai-test.archerirm.com.au/ws/field.asmx" />
+		</wsdl:port>
+		<wsdl:port name="fieldSoap12" binding="tns:fieldSoap12">
+			<soap12:address
+				location="https://krungthai-test.archerirm.com.au/ws/field.asmx" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

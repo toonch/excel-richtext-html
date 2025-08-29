@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GUIDMappings>
+    <Mapping>
+        <GUID>93df1f6c-dc36-4ced-a860-16fe0d79b9cb</GUID>
+        <Name>CIF</Name>
+    </Mapping>
+    <Mapping>
+        <GUID>another-guid-value</GUID>
+        <Name>AnotherName</Name>
+    </Mapping>
+    <!-- Add more mappings as needed -->
+</GUIDMappings>

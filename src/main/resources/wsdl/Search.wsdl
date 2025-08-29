@@ -1,0 +1,862 @@
+<wsdl:definitions
+	xmlns:s="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:tns="http://archer-tech.com/webservices/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://archer-tech.com/webservices/">
+	<wsdl:types>
+		<s:schema elementFormDefault="qualified"
+			targetNamespace="http://archer-tech.com/webservices/">
+			<s:element name="GetSearchOptions">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="searchReportId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetSearchOptionsResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetSearchOptionsResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetSearchOptionsByGuid">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="searchReportGuid" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetSearchOptionsByGuidResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetSearchOptionsByGuidResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteSearch">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="searchOptions" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pageNumber"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteSearchResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ExecuteSearchResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteStatisticSearch">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="searchOptions" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pageNumber"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteStatisticSearchResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ExecuteStatisticSearchResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteStatisticSearchByReport">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="reportIdOrGuid" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pageNumber"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteStatisticSearchByReportResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ExecuteStatisticSearchByReportResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteQuickSearchWithSolutionId">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="solutionId"
+							type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1" name="keywords"
+							type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pageNumber"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="pageSize"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteQuickSearchWithSolutionIdResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ExecuteQuickSearchWithSolutionIdResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteQuickSearchWithModuleIds">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="moduleIds"
+							type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1" name="keywords"
+							type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pageNumber"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="pageSize"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ExecuteQuickSearchWithModuleIdsResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ExecuteQuickSearchWithModuleIdsResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="SearchRecords">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="moduleId"
+							type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="searchOptions" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="SearchRecordsResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1"
+							name="SearchRecordsResult" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="SearchRecordsByField">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="fieldId"
+							type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1" name="keywords"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="SearchRecordsByFieldResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="SearchRecordsByFieldResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CheckSearchStatus">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="searchId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CheckSearchStatusResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="CheckSearchStatusResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CheckSearchStatusByPageSize">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="searchId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="recordsPerPage" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CheckSearchStatusByPageSizeResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="CheckSearchStatusByPageSizeResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="RetrieveSearchResultsPage">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="searchId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="pageId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="RetrieveSearchResultsPageResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="RetrieveSearchResultsPageResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="RetrieveSearchResultsPageByPageSize">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="searchId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="pageId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1"
+							name="recordsPerPage" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element
+				name="RetrieveSearchResultsPageByPageSizeResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="RetrieveSearchResultsPageByPageSizeResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetReports">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetReportsResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="GetReportsResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="SearchRecordsByReport">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="sessionToken" type="s:string" />
+						<s:element minOccurs="0" maxOccurs="1"
+							name="reportIdOrGuid" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pageNumber"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="SearchRecordsByReportResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="SearchRecordsByReportResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+		</s:schema>
+	</wsdl:types>
+	<wsdl:message name="GetSearchOptionsSoapIn">
+		<wsdl:part name="parameters" element="tns:GetSearchOptions" />
+	</wsdl:message>
+	<wsdl:message name="GetSearchOptionsSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetSearchOptionsResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetSearchOptionsByGuidSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:GetSearchOptionsByGuid" />
+	</wsdl:message>
+	<wsdl:message name="GetSearchOptionsByGuidSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetSearchOptionsByGuidResponse" />
+	</wsdl:message>
+	<wsdl:message name="ExecuteSearchSoapIn">
+		<wsdl:part name="parameters" element="tns:ExecuteSearch" />
+	</wsdl:message>
+	<wsdl:message name="ExecuteSearchSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:ExecuteSearchResponse" />
+	</wsdl:message>
+	<wsdl:message name="ExecuteStatisticSearchSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:ExecuteStatisticSearch" />
+	</wsdl:message>
+	<wsdl:message name="ExecuteStatisticSearchSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:ExecuteStatisticSearchResponse" />
+	</wsdl:message>
+	<wsdl:message name="ExecuteStatisticSearchByReportSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:ExecuteStatisticSearchByReport" />
+	</wsdl:message>
+	<wsdl:message name="ExecuteStatisticSearchByReportSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:ExecuteStatisticSearchByReportResponse" />
+	</wsdl:message>
+	<wsdl:message
+		name="ExecuteQuickSearchWithSolutionIdSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:ExecuteQuickSearchWithSolutionId" />
+	</wsdl:message>
+	<wsdl:message
+		name="ExecuteQuickSearchWithSolutionIdSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:ExecuteQuickSearchWithSolutionIdResponse" />
+	</wsdl:message>
+	<wsdl:message name="ExecuteQuickSearchWithModuleIdsSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:ExecuteQuickSearchWithModuleIds" />
+	</wsdl:message>
+	<wsdl:message
+		name="ExecuteQuickSearchWithModuleIdsSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:ExecuteQuickSearchWithModuleIdsResponse" />
+	</wsdl:message>
+	<wsdl:message name="SearchRecordsSoapIn">
+		<wsdl:part name="parameters" element="tns:SearchRecords" />
+	</wsdl:message>
+	<wsdl:message name="SearchRecordsSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:SearchRecordsResponse" />
+	</wsdl:message>
+	<wsdl:message name="SearchRecordsByFieldSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:SearchRecordsByField" />
+	</wsdl:message>
+	<wsdl:message name="SearchRecordsByFieldSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:SearchRecordsByFieldResponse" />
+	</wsdl:message>
+	<wsdl:message name="CheckSearchStatusSoapIn">
+		<wsdl:part name="parameters" element="tns:CheckSearchStatus" />
+	</wsdl:message>
+	<wsdl:message name="CheckSearchStatusSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:CheckSearchStatusResponse" />
+	</wsdl:message>
+	<wsdl:message name="CheckSearchStatusByPageSizeSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:CheckSearchStatusByPageSize" />
+	</wsdl:message>
+	<wsdl:message name="CheckSearchStatusByPageSizeSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:CheckSearchStatusByPageSizeResponse" />
+	</wsdl:message>
+	<wsdl:message name="RetrieveSearchResultsPageSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:RetrieveSearchResultsPage" />
+	</wsdl:message>
+	<wsdl:message name="RetrieveSearchResultsPageSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:RetrieveSearchResultsPageResponse" />
+	</wsdl:message>
+	<wsdl:message
+		name="RetrieveSearchResultsPageByPageSizeSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:RetrieveSearchResultsPageByPageSize" />
+	</wsdl:message>
+	<wsdl:message
+		name="RetrieveSearchResultsPageByPageSizeSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:RetrieveSearchResultsPageByPageSizeResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetReportsSoapIn">
+		<wsdl:part name="parameters" element="tns:GetReports" />
+	</wsdl:message>
+	<wsdl:message name="GetReportsSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:GetReportsResponse" />
+	</wsdl:message>
+	<wsdl:message name="SearchRecordsByReportSoapIn">
+		<wsdl:part name="parameters"
+			element="tns:SearchRecordsByReport" />
+	</wsdl:message>
+	<wsdl:message name="SearchRecordsByReportSoapOut">
+		<wsdl:part name="parameters"
+			element="tns:SearchRecordsByReportResponse" />
+	</wsdl:message>
+	<wsdl:portType name="searchSoap">
+		<wsdl:operation name="GetSearchOptions">
+			<wsdl:input message="tns:GetSearchOptionsSoapIn" />
+			<wsdl:output message="tns:GetSearchOptionsSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetSearchOptionsByGuid">
+			<wsdl:input message="tns:GetSearchOptionsByGuidSoapIn" />
+			<wsdl:output message="tns:GetSearchOptionsByGuidSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteSearch">
+			<wsdl:input message="tns:ExecuteSearchSoapIn" />
+			<wsdl:output message="tns:ExecuteSearchSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteStatisticSearch">
+			<wsdl:input message="tns:ExecuteStatisticSearchSoapIn" />
+			<wsdl:output message="tns:ExecuteStatisticSearchSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteStatisticSearchByReport">
+			<wsdl:input
+				message="tns:ExecuteStatisticSearchByReportSoapIn" />
+			<wsdl:output
+				message="tns:ExecuteStatisticSearchByReportSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteQuickSearchWithSolutionId">
+			<wsdl:input
+				message="tns:ExecuteQuickSearchWithSolutionIdSoapIn" />
+			<wsdl:output
+				message="tns:ExecuteQuickSearchWithSolutionIdSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteQuickSearchWithModuleIds">
+			<wsdl:input
+				message="tns:ExecuteQuickSearchWithModuleIdsSoapIn" />
+			<wsdl:output
+				message="tns:ExecuteQuickSearchWithModuleIdsSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="SearchRecords">
+			<wsdl:input message="tns:SearchRecordsSoapIn" />
+			<wsdl:output message="tns:SearchRecordsSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="SearchRecordsByField">
+			<wsdl:input message="tns:SearchRecordsByFieldSoapIn" />
+			<wsdl:output message="tns:SearchRecordsByFieldSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="CheckSearchStatus">
+			<wsdl:input message="tns:CheckSearchStatusSoapIn" />
+			<wsdl:output message="tns:CheckSearchStatusSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="CheckSearchStatusByPageSize">
+			<wsdl:input
+				message="tns:CheckSearchStatusByPageSizeSoapIn" />
+			<wsdl:output
+				message="tns:CheckSearchStatusByPageSizeSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="RetrieveSearchResultsPage">
+			<wsdl:input message="tns:RetrieveSearchResultsPageSoapIn" />
+			<wsdl:output
+				message="tns:RetrieveSearchResultsPageSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation
+			name="RetrieveSearchResultsPageByPageSize">
+			<wsdl:input
+				message="tns:RetrieveSearchResultsPageByPageSizeSoapIn" />
+			<wsdl:output
+				message="tns:RetrieveSearchResultsPageByPageSizeSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="GetReports">
+			<wsdl:input message="tns:GetReportsSoapIn" />
+			<wsdl:output message="tns:GetReportsSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="SearchRecordsByReport">
+			<wsdl:input message="tns:SearchRecordsByReportSoapIn" />
+			<wsdl:output message="tns:SearchRecordsByReportSoapOut" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="searchSoap" type="tns:searchSoap">
+		<soap:binding
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GetSearchOptions">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetSearchOptions"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetSearchOptionsByGuid">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetSearchOptionsByGuid"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteSearch">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/ExecuteSearch"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteStatisticSearch">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/ExecuteStatisticSearch"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteStatisticSearchByReport">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/ExecuteStatisticSearchByReport"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteQuickSearchWithSolutionId">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/ExecuteQuickSearchWithSolutionId"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteQuickSearchWithModuleIds">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/ExecuteQuickSearchWithModuleIds"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SearchRecords">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/SearchRecords"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SearchRecordsByField">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/SearchRecordsByField"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CheckSearchStatus">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/CheckSearchStatus"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CheckSearchStatusByPageSize">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/CheckSearchStatusByPageSize"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RetrieveSearchResultsPage">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/RetrieveSearchResultsPage"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="RetrieveSearchResultsPageByPageSize">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/RetrieveSearchResultsPageByPageSize"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetReports">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/GetReports"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SearchRecordsByReport">
+			<soap:operation
+				soapAction="http://archer-tech.com/webservices/SearchRecordsByReport"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="searchSoap12" type="tns:searchSoap">
+		<soap12:binding
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GetSearchOptions">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetSearchOptions"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetSearchOptionsByGuid">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetSearchOptionsByGuid"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteSearch">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/ExecuteSearch"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteStatisticSearch">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/ExecuteStatisticSearch"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteStatisticSearchByReport">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/ExecuteStatisticSearchByReport"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteQuickSearchWithSolutionId">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/ExecuteQuickSearchWithSolutionId"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ExecuteQuickSearchWithModuleIds">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/ExecuteQuickSearchWithModuleIds"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SearchRecords">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/SearchRecords"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SearchRecordsByField">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/SearchRecordsByField"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CheckSearchStatus">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/CheckSearchStatus"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CheckSearchStatusByPageSize">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/CheckSearchStatusByPageSize"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RetrieveSearchResultsPage">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/RetrieveSearchResultsPage"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="RetrieveSearchResultsPageByPageSize">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/RetrieveSearchResultsPageByPageSize"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetReports">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/GetReports"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SearchRecordsByReport">
+			<soap12:operation
+				soapAction="http://archer-tech.com/webservices/SearchRecordsByReport"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="search">
+		<wsdl:port name="searchSoap" binding="tns:searchSoap">
+			<soap:address
+				location="https://krungthai-test.archerirm.com.au/ws/search.asmx" />
+		</wsdl:port>
+		<wsdl:port name="searchSoap12" binding="tns:searchSoap12">
+			<soap12:address
+				location="https://krungthai-test.archerirm.com.au/ws/search.asmx" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
