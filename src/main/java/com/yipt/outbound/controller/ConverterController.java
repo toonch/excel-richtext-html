@@ -28,22 +28,16 @@ public class ConverterController {
     private static final Logger logger = LoggerFactory.getLogger(ConverterController.class);
 
     @PostMapping("/convert")
-    public ResponseEntity<byte[]> convert(@RequestParam("file") MultipartFile file) throws Exception {
-        File tempFile = File.createTempFile("upload-", ".xlsx");
-        file.transferTo(tempFile);
-
+    public ResponseEntity<byte[]> convert(@RequestParam("file") MultipartFile file) {
         logger.info("Received file: {}, size={}", file.getOriginalFilename(), file.getSize());
-
-        try (FileInputStream fis = new FileInputStream(tempFile);
-             XSSFWorkbook workbook = new XSSFWorkbook(fis);
-             ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-
+        try (
+            XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
+            ByteArrayOutputStream bos = new ByteArrayOutputStream()
+        ) {
             logger.info("Processing workbook with {} sheet(s)", workbook.getNumberOfSheets());
-
             for (int s = 0; s < workbook.getNumberOfSheets(); s++) {
                 XSSFSheet sheet = workbook.getSheetAt(s);
                 logger.info("Processing sheet: {}", sheet.getSheetName());
-
                 for (Row row : sheet) {
                     for (Cell cell : row) {
                         if (cell.getCellType() == CellType.STRING) {
@@ -53,17 +47,14 @@ public class ConverterController {
                     }
                 }
             }
-
             workbook.write(bos);
             logger.info("Workbook conversion completed for file: {}", file.getOriginalFilename());
-
             return ResponseEntity.ok()
                     .header("Content-Disposition", "attachment; filename=converted.xlsx")
                     .body(bos.toByteArray());
-
         } catch (Exception e) {
-            logger.error("Error converting file: {}", file.getOriginalFilename(), e);
-            throw e;
+            logger.error("Error converting file: {} - {}", file.getOriginalFilename(), e.getMessage(), e);
+            return ResponseEntity.status(500).body(null);
         }
     }
 
