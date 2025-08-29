@@ -29,7 +29,9 @@ public class ConverterController {
 
     @PostMapping("/convert")
     public ResponseEntity<byte[]> convert(@RequestParam("file") MultipartFile file) {
-        logger.info("Received file: {}, size={}", file.getOriginalFilename(), file.getSize());
+    System.out.println("/convert endpoint called");
+    logger.info("/convert endpoint called");
+    logger.info("Received file: {}, size={}", file.getOriginalFilename(), file.getSize());
         try (
             XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
             ByteArrayOutputStream bos = new ByteArrayOutputStream()
@@ -54,6 +56,8 @@ public class ConverterController {
                     .body(bos.toByteArray());
         } catch (Exception e) {
             logger.error("Error converting file: {} - {}", file.getOriginalFilename(), e.getMessage(), e);
+            e.printStackTrace();
+            System.out.println("Exception in /convert: " + e);
             return ResponseEntity.status(500).body(null);
         }
     }
